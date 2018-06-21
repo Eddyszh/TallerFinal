@@ -7,7 +7,7 @@ namespace NPC                                                                   
 {
     namespace Ally                                                                      //namespace Ally, pertenece al namespace NPC y contiene la clase del ciudadano.
     {
-        public class Citizen : Npc
+        public sealed class Citizen : Npc
         {
             CitizenInformation citizenInfo;                                             //Declaración de la estructura del ciudadano.
 	        void Start ()
@@ -48,7 +48,7 @@ namespace NPC                                                                   
                 return z;
             }
 
-            public static implicit operator Ghost(Citizen c)
+            public static implicit operator Ghost(Citizen c)                            //Hace el cast de la clase ciudadano a la clase ghost.
             {
                 Ghost g = c.gameObject.AddComponent<Ghost>();
                 print(g.humanoidInfo.age);

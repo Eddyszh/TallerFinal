@@ -7,7 +7,7 @@ namespace NPC
 {
     namespace Enemy
     {
-        public class Ghost : Npc
+        public sealed class Ghost : Npc
         {
             GameManager gm;
             void Start()
@@ -16,7 +16,7 @@ namespace NPC
                 gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 gm = FindObjectOfType<GameManager>().GetComponent<GameManager>();
                 gameObject.AddComponent<EnemyHealth>();
-                transform.position += new Vector3(0f, 0.3f, 0f);
+                transform.position += new Vector3(0f, 3f, 0f);
             }
 
             private void OnCollisionEnter(Collision collision)                                  //Si entra en colision con el ciudadano lo convierte en zombiey modifica el contador.
@@ -33,7 +33,7 @@ namespace NPC
                 }
             }
 
-            void OnDisable()
+            void OnDisable()                                                                    //Cuando se desactiva disminuye el contador de fantasmas.
             {
                 gm.ghostCount--;
                 gm.ghostText.text = "Ghost: " + gm.ghostCount.ToString();

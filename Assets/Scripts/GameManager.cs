@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
         EndGame();
     }
 
-    void EndGame()
+    void EndGame()                                                                              //Método que se encarga cuando finaliza la partida.
     {
         if (heroSlider.value == 0 && Time.timeScale == 1.0f)
         {
@@ -110,6 +110,7 @@ public class GameManager : MonoBehaviour
         }
     }
 }
+
 public class MinValue                                                                          //Constructor para obtener el valor de creación mínimo de personajes, por medio de una variable entera de solo lectura.
 {
     public readonly int minValue;

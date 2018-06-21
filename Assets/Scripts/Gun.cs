@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    int gunDamage = 1;
-    float fireRate = 0.25f;
-    float weaponRange = 50f;
-    public int ammo = 20;
-    float timer;
-    Ray shootRay;
-    RaycastHit shootHit;
-    int shootableMask;
-    LineRenderer gunLine;
-    float effectTime = 0.2f;
+    int gunDamage = 1;                                                                                              //Daño que causa el arma.
+    float fireRate = 0.25f;                                                                                         //Cadencia de disparo.
+    float weaponRange = 10f;                                                                                        //Rango de alcance del arma.
+    public int ammo = 20;                                                                                           //Cantidad de munición del arma.
+    float timer;                                                                                                    //Temporizador para disparar.
+    Ray shootRay;                                                                                                   //Representa un rayo desde el origen en una dirección asignada.
+    RaycastHit shootHit;                                                                                            //Analiza cuando el raycast impacta en un objeto.
+    int shootableMask;                                                                                              //
+    LineRenderer gunLine;                                                                                           //Linea que se traza para indicar el efecto de disparo.
+    float effectTime = 0.2f;                                                                                        //Temporizador que se encarga de desactivar la linea de render.
 
     GameManager gm;
 
-	// Use this for initialization
-	void Awake ()
+	void Awake ()                                                                                                   //
     {
         shootableMask = LayerMask.GetMask("Shootable");
         gunLine = GetComponent<LineRenderer>();
@@ -26,7 +25,6 @@ public class Gun : MonoBehaviour
         gm.ammo.text = ammo.ToString() + "/20";
 	}
 	
-	// Update is called once per frame
 	void Update ()
     {
         timer += Time.deltaTime;
@@ -37,12 +35,12 @@ public class Gun : MonoBehaviour
             DisableEffect();
 	}
 
-    public void DisableEffect()
+    public void DisableEffect()                                                                         //Desactiva la linea de render.
     {
         gunLine.enabled = false;
     }
 
-    void Shoot()
+    void Shoot()                                                                                        //Método que ejecuta todo el proceso de disparo.
     {
         timer = 0f;
         ammo -= 1;
@@ -59,7 +57,7 @@ public class Gun : MonoBehaviour
             if (enemyHealth != null)
                 enemyHealth.TakeDamage(gunDamage, shootHit.point);
 
-            gunLine.SetPosition(1, transform.position);
+            gunLine.SetPosition(1, shootRay.origin + shootRay.direction * weaponRange);
         }
         else
             gunLine.SetPosition(1, shootRay.origin + shootRay.direction * weaponRange);

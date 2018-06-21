@@ -7,7 +7,7 @@ namespace NPC                                                                   
 {
     namespace Enemy                                                                             //namespace Enemy, pertenece al namespace NPC y contiene la clase del zombie.
     {
-        public class Zombie : Npc 
+        public sealed class Zombie : Npc 
         {
             ZombieInformation zombieInfo;                                                       //Declaración de la estructura del zombie.
             GameManager gm;

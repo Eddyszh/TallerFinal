@@ -21,6 +21,10 @@ public class Npc : MonoBehaviour
         humanoidInfo.movementSpeed = 200f / humanoidInfo.age * Time.deltaTime;
         agent = GetComponent<NavMeshAgent>();
         gameObject.layer = 9;
+        if (gameObject.GetComponent<Ghost>())
+        {
+            GetComponent<NavMeshAgent>().baseOffset = 1;
+        }
     }	
 	
 	void Update ()                                                                              //Contiene la ejecución de estados de los zombies y ciudadanos.
